@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+docker network create --driver=bridge --subnet=172.50.0.0/24 coffee-machine_net || true
+docker build docker/images/php-cli -t coffee-machine.php-cli

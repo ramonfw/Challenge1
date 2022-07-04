@@ -1,0 +1,9 @@
+#!/bin/bash
+
+docker run --rm -it                                                                                                     \
+    --name "vending-machine-infection-execution"                                                                        \
+    --network "coffee-machine_net"                                                                                      \
+    -v "${PWD}:/usr/src"                                                                                                \
+    -w "/usr/src"                                                                                                       \
+    -e "XDEBUG_MODE=coverage"                                                                                           \
+    coffee-machine.php-cli php vendor/bin/infection "$@"

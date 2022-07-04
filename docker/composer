@@ -1,0 +1,12 @@
+#!/bin/bash
+
+HOST_USER_NAME=`whoami`
+HOST_USER_ID=`id -u ${HOST_USER_NAME}`
+
+docker run --rm -it                                                                                                     \
+    --user "${HOST_USER_ID}"                                                                                            \
+    --name "vending-machine-composer-execution"                                                                         \
+    --network "coffee-machine_net"                                                                                      \
+    -v "${PWD}:/app"                                                                                                    \
+    -w "/app"                                                                                                           \
+    composer $@
