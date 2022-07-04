@@ -6,6 +6,9 @@ use GetWith\CoffeeMachine\Console\MakeDrinkCommand;
 use GetWith\CoffeeMachine\Tests\Integration\IntegrationTestCase;
 use Symfony\Component\Console\Tester\CommandTester;
 
+use GetWith\CoffeeMachine\Interfaces\IDataDrink;
+use GetWith\CoffeeMachine\Interfaces\IDataSugar;
+
 class MakeDrinkCommandTest extends IntegrationTestCase
 {
     protected function setUp(): void
@@ -51,25 +54,25 @@ class MakeDrinkCommandTest extends IntegrationTestCase
     {
         return [
             [
-                'chocolate', '0.7', 1, '', 'You have ordered a chocolate with 1 sugars (stick included)' . PHP_EOL
+                'chocolate', '0.6', 1, '', 'You have ordered a chocolate with 1 sugars (stick included)' . PHP_EOL
             ],
             [
-                'tea', '0.4', 0, '1', 'You have ordered a tea extra hot' . PHP_EOL
+                'tea', '0.4', 0, '-e', 'You have ordered a tea extra hot' . PHP_EOL
             ],
             [
-                'coffee', '2', 2, '1', 'You have ordered a coffee extra hot with 2 sugars (stick included)' . PHP_EOL
+                'coffee', '0.5', 2, '-e', 'You have ordered a coffee extra hot with 2 sugars (stick included)' . PHP_EOL
             ],
             [
-                'coffee', '0.2', 2, '1', 'The coffee costs 0.5.' . PHP_EOL
+                'coffee', '0.2', 2, '-e', 'The coffee costs 0.5.' . PHP_EOL
             ],
             [
-                'chocolate', '0.3', 2, '1', 'The chocolate costs 0.6.' . PHP_EOL
+                'chocolate', '0.3', 2, '-e', 'The chocolate costs 0.6.' . PHP_EOL
             ],
             [
-                'tea', '0.1', 2, '1', 'The tea costs 0.4.' . PHP_EOL
+                'tea', '0.1', 2, '-e', 'The tea costs 0.4.' . PHP_EOL
             ],
             [
-                'tea', '0.5', -1, '1', 'The number of sugars should be between 0 and 2.' . PHP_EOL
+                'tea', '0.5', -1, '-e', 'The number of sugars should be between 0 and 2.' . PHP_EOL
             ],
             [
                 'tea', '0.5', 3, '1', 'The number of sugars should be between 0 and 2.' . PHP_EOL
